@@ -1,5 +1,4 @@
 import Orphanage from '../models/orphanage'
-import images_view from './images_view'
 import imagesView from './images_view'
 
 export default {
@@ -12,6 +11,7 @@ export default {
             about: orphanage.about,
             instructions: orphanage.instructions,
             opening_hours: orphanage.opening_hours,
+            whatsapp: orphanage.whatsapp,
             open_on_weekends: orphanage.open_on_weekends,
             images: imagesView.renderMany(orphanage.images)
         }

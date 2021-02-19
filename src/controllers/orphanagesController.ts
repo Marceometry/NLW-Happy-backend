@@ -32,6 +32,7 @@ export default {
             about,
             instructions,
             opening_hours,
+            whatsapp,
             open_on_weekends
         } = req.body
 
@@ -47,6 +48,7 @@ export default {
             about,
             instructions,
             opening_hours,
+            whatsapp,
             open_on_weekends: open_on_weekends === 'true',
             images
         }
@@ -58,6 +60,7 @@ export default {
             about: Yup.string().required().max(300),
             instructions: Yup.string().required(),
             opening_hours: Yup.string().required(),
+            whatsapp: Yup.string().required(),
             open_on_weekends: Yup.string().required(),
             images: Yup.array(
                 Yup.object().shape({
