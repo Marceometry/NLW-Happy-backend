@@ -30,9 +30,9 @@ export default {
             lat,
             lng,
             about,
+            whatsapp,
             instructions,
             opening_hours,
-            whatsapp,
             open_on_weekends
         } = req.body
 
@@ -46,9 +46,9 @@ export default {
             lat,
             lng,
             about,
+            whatsapp,
             instructions,
             opening_hours,
-            whatsapp,
             open_on_weekends: open_on_weekends === 'true',
             images
         }
@@ -58,9 +58,9 @@ export default {
             lat: Yup.number().required(),
             lng: Yup.number().required(),
             about: Yup.string().required().max(300),
+            whatsapp: Yup.string().required(),
             instructions: Yup.string().required(),
             opening_hours: Yup.string().required(),
-            whatsapp: Yup.string().required(),
             open_on_weekends: Yup.string().required(),
             images: Yup.array(
                 Yup.object().shape({
@@ -78,7 +78,56 @@ export default {
         const orphanage = orphanagesRepository.create(data)
     
         await orphanagesRepository.save(orphanage)
+
     
         return res.status(201).json(orphanage)
+    },
+
+    async update(req: Request, res: Response) {
+        const { id } = req.params
+
+        const {
+            name,
+            // lat,
+            // lng,
+            about,
+            whatsapp,
+            instructions,
+            opening_hours,
+            open_on_weekends
+        } = req.body
+        
+        // const reqImages = req.files as Express.Multer.File[]
+        // const images = reqImages.map(image => {
+        //     return { path: image.filename }
+        // })
+
+        const data = {
+            name,
+            // lat,
+            // lng,
+            about,
+            whatsapp,
+            instructions,
+            opening_hours,
+            open_on_weekends: open_on_weekends === 'true',
+            // images
+        }
+        
+        const orphanagesRepository = getRepository(Orphanage)
+
+        await orphanagesRepository.update(id, {
+            name: data.name,
+            // lat: data.lat,
+            // lng: data.lng,
+            about: data.about,
+            whatsapp: data.whatsapp,
+            instructions: data.instructions,
+            opening_hours: data.opening_hours,
+            open_on_weekends: data.open_on_weekends,
+            // images: data.images
+        })
+
+        return res.json({ message: 'Edited'})
     }
 }

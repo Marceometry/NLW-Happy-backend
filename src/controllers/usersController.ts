@@ -3,7 +3,7 @@ import { getRepository } from 'typeorm'
 import User from '../models/user'
 
 export default {
-    async createUser(req: Request, res: Response) {
+    async create(req: Request, res: Response) {
         const {
             name,
             email,
